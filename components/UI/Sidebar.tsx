@@ -1,16 +1,22 @@
+import { useContext } from "react";
 import { Drawer,Box, Typography, List, ListItem,ListItemIcon,ListItemText,Divider } from "@mui/material";
+
 import InboxOutlinedIcon from '@mui/icons-material/InboxOutlined';
 import MailOutlineOutlinedIcon from '@mui/icons-material/MailOutlineOutlined';
 
+import { UIContext } from "@/context/UI";
 
 const menuItems:string[] = ['Inbox','Starred','Send Email','Drafts'];
 
 const Sidebar = () => {
+   const { sidemenuOpen,closeSideMenu } = useContext(UIContext)
+
+
   return (
       <Drawer 
          anchor="left" 
-         open={true} 
-         onClose={()=>console.log('cerrando')}
+         open={sidemenuOpen} 
+         onClose={closeSideMenu}
       >
          <Box sx={{width:250}}>
             <Box sx={{padding:'5px 10px'}}>
