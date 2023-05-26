@@ -3,7 +3,9 @@ import { UIState } from './';
 type UIActionType = 
 | {   type : 'UI - Open Sidebar'   }
 | {   type : 'UI - Close Sidebar'   }
-
+| {   type : 'UI - newEntry', payload:boolean   }
+| {   type : 'UI - Start-Dragging'}
+| {   type : 'UI - End-Dragging',}
 
 
 export const uiReducer = (state:UIState, action:UIActionType):UIState => {
@@ -17,7 +19,22 @@ export const uiReducer = (state:UIState, action:UIActionType):UIState => {
          return {
             ...state,
             sidemenuOpen : false,
-         }
+         };
+      case 'UI - newEntry': 
+         return {
+            ...state,
+            isAddingEntry : action.payload,
+         };
+      case 'UI - Start-Dragging': 
+         return {
+            ...state,
+            isDragging : true,
+         };
+      case 'UI - End-Dragging': 
+         return {
+            ...state,
+            isDragging : false,
+         };
       default:
          return state;
    }

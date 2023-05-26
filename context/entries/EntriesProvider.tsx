@@ -1,7 +1,6 @@
 import { useReducer } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 import { Entry } from "@/interface";
-import { uiReducer } from "../UI";
 import { EntriesContext,entriesReducer } from "./";
 
 
@@ -34,13 +33,29 @@ const ENTRIES_INITIAL_STATES:EntriesState  = {
    ]
 }
 
+
 export const EntriesProvider:React.FC<EntriesProviderProps> = ({children}) => {
 
-   const [ state, dispatch ] = useReducer(entriesReducer,ENTRIES_INITIAL_STATES)
+   const [ state, dispatch ] = useReducer(entriesReducer,ENTRIES_INITIAL_STATES);
+   
+   const addNewEntry = (description:string) => {
+      const newEntry:Entry = {
+         _id: uuidv4(),
+         description,
+         createdAt: Date.now(),
+         status: 'pending'
+      };
+      dispatch({type:'[Entry] Add-Entry',payload:newEntry});
+   };
+
+   const updateEntry = (entry:Entry) => dispatch({type:'[Entry] Update-updated', payload:entry});
 
    return (
       <EntriesContext.Provider value={{
-         ...state  
+         ...state,
+         // methods
+         addNewEntry,
+         updateEntry
       }}>
          {children}
       </EntriesContext.Provider>
