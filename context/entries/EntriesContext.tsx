@@ -3,6 +3,9 @@ import { createContext } from "react";
 
 interface ContextProps {
    entries : Entry[];
+   updateEntry : (entry:Entry) => void;
+   addNewEntry:(description:string)=> void ;
+
 }
 
 
