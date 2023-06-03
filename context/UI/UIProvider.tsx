@@ -10,6 +10,7 @@ export interface UIState {
    isDragging : boolean,
 };
 
+
 const UI_INITIAL_STATE : UIState = {
    sidemenuOpen : false,
    isAddingEntry:false,
